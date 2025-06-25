@@ -13,9 +13,7 @@ const nextConfig = {
     experimental: {
         appDir: true,
     },
+    pwa: pwaConfig,
 };
 
-export default withPWA({
-    ...nextConfig,
-    pwa: pwaConfig,
-});
+export default withPWA(nextConfig);
