@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Footer from "@/components/footer";
 
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -24,6 +25,11 @@ export default function RootLayout({ children }) {
 
     
     <html lang="en">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#0044ff" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+      </head>
       <ClerkProvider>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <Navbar/>

@@ -10,7 +10,7 @@ const HomeHero = () => {
   const router = useRouter();
 
   return (
-    <section className='grid grid-cols-1 lg:grid-cols-2 bg-[var(--yellow-bg)] min-h-screen px-4 md:px-12 pt-6 gap-8 lg:pr-0'>
+    <section className='grid grid-cols-1 lg:grid-cols-2 bg-[var(--yellow-bg)] min-h-screen px-4 md:px-12 lg:pt-0 pt-6 gap-8 lg:pr-0'>
       {/* Text Content */}
       <div className='flex flex-col justify-center items-center lg:items-start text-center lg:text-left gap-6'>
         <h1 className='text-3xl sm:text-4xl md:text-5xl font-bold text-[var(--color)] leading-tight'>
