@@ -22,22 +22,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-
-    
     <html lang="en">
-      <head>
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0044ff" />
-        <link rel="apple-touch-icon" href="/icon-192x192.png" />
-      </head>
-      <ClerkProvider>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <ClerkProvider>
           <Navbar/>
           {children}
           <Footer />
-        </body>
-      </ClerkProvider>
-      </html>
-
+        </ClerkProvider>
+      </body>
+    </html>
   )
 }
