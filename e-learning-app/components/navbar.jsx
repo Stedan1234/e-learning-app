@@ -21,6 +21,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '/pages/dashboard', label: 'Dashboard' },
     { href: '/pages/about', label: 'About' },
+    { href: '/pages/contact', label: 'Contact' },
   ];
 
   const isActive = (href) => {
@@ -61,7 +62,7 @@ const Navbar = () => {
             </SignedIn>
             <SignedOut>
               {navLinks
-                .filter((link) => link.label === 'About')
+                .filter((link) => link.label === 'About' || link.label === 'Contact')
                 .map((link) => (
                   <Link
                     key={link.href}
