@@ -3,32 +3,34 @@ import React, { useState } from 'react';
 import logoImg from '@/public/logoImg.png';
 import Image from 'next/image';
 import Link from 'next/link';
-import { CiSearch, CiMenuBurger } from 'react-icons/ci';
+import { usePathname } from 'next/navigation';
+import { CiMenuBurger } from 'react-icons/ci';
 import { AiOutlineClose } from 'react-icons/ai';
 import {
-  ClerkProvider,
   SignInButton,
   SignUpButton,
   SignedIn,
   SignedOut,
   UserButton,
 } from '@clerk/nextjs';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-  SelectGroup,
-  SelectLabel,
-} from '@/components/ui/select';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navLinks = [
+    { href: '/pages/dashboard', label: 'Dashboard' },
+    { href: '/pages/about', label: 'About' },
+  ];
+
+  const isActive = (href) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  };
 
   return (
-    <ClerkProvider>
-      <nav className='sticky top-0 z-50 bg-white shadow-md px-4 py-3 flex items-center justify-between flex-wrap'>
+    <nav className='sticky top-0 z-50 bg-white shadow-md px-4 py-3'>
+      <div className='max-w-7xl mx-auto flex items-center justify-between'>
         {/* Logo */}
         <Link
           href='/'
@@ -38,67 +40,125 @@ const Navbar = () => {
           MyCourse.io
         </Link>
 
-        {/* Toggle Button */}
+        {/* Desktop Navigation */}
+        <div className='hidden md:flex items-center gap-8'>
+          {/* Navigation Links */}
+          <div className='flex items-center gap-6'>
+            <SignedIn>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors hover:text-[var(--color-hover)] ${
+                    isActive(link.href)
+                      ? 'text-[var(--color-hover)] border-b-2 border-[var(--color-hover)] pb-1'
+                      : 'text-[var(--gray-color)]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </SignedIn>
+            <SignedOut>
+              {navLinks
+                .filter((link) => link.label === 'About')
+                .map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-sm font-medium transition-colors hover:text-[var(--color-hover)] ${
+                      isActive(link.href)
+                        ? 'text-[var(--color-hover)] border-b-2 border-[var(--color-hover)] pb-1'
+                        : 'text-[var(--gray-color)]'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+            </SignedOut>
+          </div>
+
+          {/* Auth Section */}
+          <div className='flex items-center gap-3'>
+            <SignedIn>
+              <UserButton
+                appearance={{
+                  elements: {
+                    userButtonAvatarBox: 'w-8 h-8',
+                  },
+                }}
+              />
+            </SignedIn>
+
+            <SignedOut>
+              <SignInButton mode='modal'>
+                <button className='px-4 py-2 rounded-lg text-sm text-[var(--color)] border border-[var(--color)] hover:bg-[var(--color)] hover:text-white transition-all'>
+                  Sign In
+                </button>
+              </SignInButton>
+              <SignUpButton mode='modal'>
+                <button className='px-4 py-2 rounded-lg text-sm bg-[var(--color)] text-white hover:bg-[var(--color-hover)] transition-all'>
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+          </div>
+        </div>
+
+        {/* Mobile Menu Button */}
         <button
           className='md:hidden text-[var(--color)] text-2xl'
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           {isMenuOpen ? <AiOutlineClose /> : <CiMenuBurger />}
         </button>
+      </div>
 
-        {/* Navigation Links */}
-        <div
-          className={`w-full md:flex md:items-center md:w-auto  ${
-            isMenuOpen ? 'block' : 'hidden'
-          }`}
-        >
-          <div className='flex flex-col md:flex-row md:items-center md:gap-6 mt-4 md:mt-0 '>
-            {/* Dropdown */}
-            <Select>
-              <SelectTrigger className='w-[160px]'>
-                <SelectValue placeholder='Browse' />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Explore</SelectLabel>
-                  <SelectItem value='courses'>Courses</SelectItem>
-                  <SelectItem value='teachers'>Teachers</SelectItem>
-                  <SelectItem value='students'>Students</SelectItem>
-                  <SelectItem value='workshops'>Workshops</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className='md:hidden mt-4 pb-4 border-t border-gray-200'>
+          <div className='flex flex-col gap-4 pt-4'>
+            {/* Mobile Navigation Links */}
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium px-2 py-1 rounded transition-colors ${
+                  isActive(link.href)
+                    ? 'text-[var(--color-hover)] bg-gray-50'
+                    : 'text-[var(--gray-color)]'
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {link.label}
+              </Link>
+            ))}
 
-            {/* Search */}
-            <div className='relative w-full md:w-[200px] mt-3 md:mt-0'>
-              <input
-                type='text'
-                placeholder='Search for course'
-                className='w-full border border-gray-300 rounded px-3 py-2 bg-[#F9F9F9] text-[var(--gray-color)] focus:outline-none'
-              />
-              <CiSearch className='absolute right-3 top-1/2 transform -translate-y-1/2 text-[var(--color)]' />
-            </div>
-
-            {/* Auth Section */}
-            <div className='flex items-center gap-2 mt-4 md:mt-0'>
+            {/* Mobile Auth */}
+            <div className='flex flex-col gap-2 mt-4'>
               <SignedIn>
-                <Link
-                  href='/courses'
-                  className='text-[var(--color)] hover:text-[var(--color-hover)] transition-colors underline'
-                >
-                  View Courses
-                </Link>
-                <UserButton />
+                <div className='flex items-center gap-2'>
+                  <span className='text-sm text-[var(--gray-color)]'>
+                    Account:
+                  </span>
+                  <UserButton afterSignOutUrl='/' />
+                </div>
               </SignedIn>
 
               <SignedOut>
                 <SignInButton mode='modal'>
-                  <button className='px-3 py-1 rounded text-sm text-[var(--color)] border border-[var(--color)] hover:bg-[var(--color)] hover:text-white transition'>
+                  <button
+                    className='w-full px-4 py-2 rounded-lg text-sm text-[var(--color)] border border-[var(--color)] hover:bg-[var(--color)] hover:text-white transition-all'
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Sign In
                   </button>
                 </SignInButton>
                 <SignUpButton mode='modal'>
-                  <button className='px-3 py-1 rounded text-sm text-[var(--color)] bg-[var(--background)] hover:opacity-90 transition hover:text-[var(--color-hover)] '>
+                  <button
+                    className='w-full px-4 py-2 rounded-lg text-sm bg-[var(--color)] text-white hover:bg-[var(--color-hover)] transition-all'
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Sign Up
                   </button>
                 </SignUpButton>
@@ -106,8 +166,8 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </nav>
-    </ClerkProvider>
+      )}
+    </nav>
   );
 };
 

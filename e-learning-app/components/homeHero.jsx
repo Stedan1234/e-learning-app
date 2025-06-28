@@ -27,7 +27,7 @@ const HomeHero = () => {
               hoverText='var(--color-hover)'
               hoverBg='var(--background)'
               style={{ fontSize: '16px' }}
-              onClick={() => router.push('/courses')}
+              onClick={() => router.push('/pages/dashboard')}
             >
               Browse Courses
             </Button>
