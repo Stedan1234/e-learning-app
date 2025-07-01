@@ -8,6 +8,19 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
   const [currentCourse, setCurrentCourse] = useState(course);
   const [selectedLesson, setSelectedLesson] = useState(null);
 
+  const handleLessonComplete = (lessonId) => {
+    const updatedLessons = currentCourse.lessons.map((lesson) =>
+      lesson.id === lessonId ? { ...lesson, status: 'completed' } : lesson
+    );
+
+    const updatedCourse = { ...currentCourse, lessons: updatedLessons };
+    setCurrentCourse(updatedCourse);
+
+    if (onCourseUpdate) {
+      onCourseUpdate(updatedCourse);
+    }
+  };
+
   // Find related courses by category, excluding the current course
   const relatedCourses = courses.filter(
     (c) => c.category === course.category && c.id !== course.id
@@ -38,19 +51,7 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
     }));
   }, [currentCourse.lessons]);
 
-  const handleLessonComplete = (lessonId) => {
-    const updatedLessons = currentCourse.lessons.map((lesson) =>
-      lesson.id === lessonId ? { ...lesson, status: 'completed' } : lesson
-    );
 
-    const updatedCourse = { ...currentCourse, lessons: updatedLessons };
-    setCurrentCourse(updatedCourse);
-
-    if (onCourseUpdate) {
-      onCourseUpdate(updatedCourse);
-    }
-    };
-    
   return (
     <div className='fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center p-4'>
       {' '}
@@ -167,74 +168,36 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
 
               {/* Lesson Player Section */}
               {selectedLesson && (
-                <div className='mt-8'>
-                  <LessonPlayer
-                    lesson={selectedLesson}
-                    course={currentCourse}
-                    onLessonCompleted={() =>
-                      handleLessonComplete(selectedLesson.id)
-                    }
-                  />
-                </div>
+                <LessonPlayer
+                  lesson={selectedLesson}
+                  course={currentCourse}
+                  onLessonCompleted={handleLessonComplete} 
+                />
               )}
             </div>
 
             {/* Right Column - Related Courses */}
-            <div className='lg:col-span-1'>
-              <div className='bg-white border border-gray-200 rounded-lg p-4 mb-6'>
-                <h3 className='text-lg font-bold mb-4'>
-                  Masterclass in Design Thinking
-                </h3>
-                              <Image
-                              src='/design-thinking.jpg'
-                              alt='Design Thinking Thumbnail'
-                              width={200}
-                                  height={100}
-                                className='w-full h-40 object-cover rounded-lg mb-4'
-                            />
-                <p className='text-gray-700 mb-4'>
-                  Learn innovative design strategies and creative
-                  problem-solving techniques.
-                </p>
-                <button
-                  onClick={() =>
-                    window.open(
-                      'https://www.coursera.org/specializations/uva-darden-design-thinking',
-                      '_blank'
-                    )
-                  }
-                  className='w-full bg-blue-600 text-white py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors'
-                >
-                  Enroll Now
-                </button>
-              </div>
-
-              <div className='bg-gray-50 rounded-lg p-4'>
-                <h3 className='text-lg font-semibold mb-3'>Related Courses</h3>
-                <div className='space-y-4'>
-                  {relatedCourses.map((rc) => (
-                    <div
-                      key={rc.id}
-                      className='flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow'
-                    >
-                      <div className='bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16' />
-                      <div className='flex-1'>
-                        <h4 className='font-medium text-gray-800'>
-                          {rc.title}
-                        </h4>
-                        <p className='text-sm text-gray-600'>{rc.category}</p>
-                        <div className='flex items-center mt-1'>
-                          <span className='text-yellow-500 text-sm mr-1'>
-                            ★
-                          </span>
-                          <span className='text-xs text-gray-700'>
-                            {rc.rating || '4.5'}
-                          </span>
-                        </div>
+            <div className='bg-gray-50 rounded-lg p-4'>
+              <h3 className='text-lg font-semibold mb-3'>Related Courses</h3>
+              <div className='space-y-4'>
+                {relatedCourses.map((rc) => (
+                  <div
+                    key={rc.id}
+                    className='flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow'
+                  >
+                    <div className='bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16' />
+                    <div className='flex-1'>
+                      <h4 className='font-medium text-gray-800'>{rc.title}</h4>
+                      <p className='text-sm text-gray-600'>{rc.category}</p>
+                      <div className='flex items-center mt-1'>
+                        <span className='text-yellow-500 text-sm mr-1'>★</span>
+                        <span className='text-xs text-gray-700'>
+                          {rc.rating || '4.5'}
+                        </span>
                       </div>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>

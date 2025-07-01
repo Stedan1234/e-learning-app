@@ -1,5 +1,4 @@
 'use client';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 export default function Card({
   course,
@@ -8,20 +7,19 @@ export default function Card({
   showAddButton,
   onView,
 }) {
-  // Remove router functionality
+
   const handleViewCourse = (e) => {
     e.stopPropagation();
     onView(course);
   };
-
   return (
     <div
       className='bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer transition hover:shadow-md'
-      // onClick={handleViewCourse}
-      // role='button'
+      onClick={handleViewCourse} // Re-enable click handler
+      role='button'
     >
       {/* Course Thumbnail */}
-      <div className='h-48 bg-gray-200 border-b border-gray-200 relative'>
+      <div className='h-48 bg-[var(--muted)] border-b border-[var(--border)] relative'>
         {course.thumbnail ? (
           <Image
             src={course.thumbnail}
@@ -30,19 +28,21 @@ export default function Card({
             objectFit='cover'
           />
         ) : (
-          <div className='flex items-center justify-center w-full h-full text-gray-400'>
+          <div className='flex items-center justify-center w-full h-full text-[var(--muted-foreground)]'>
             <span>No Image</span>
           </div>
         )}
-        <div className='absolute top-2 right-2 bg-blue-100 text-[var(--color-hover)] text-xs font-medium px-2.5 py-0.5 rounded-full'>
+        <div className='absolute top-2 right-2 bg-[var(--primary-light)] text-[var(--primary)] text-xs font-medium px-2.5 py-0.5 rounded-full'>
           {course.category?.toUpperCase()}
         </div>
       </div>
 
       {/* Course Content */}
       <div className='p-4'>
-        <h3 className='font-semibold text-lg text-gray-800'>{course.title}</h3>
-        <p className='text-sm text-gray-600 mt-1 line-clamp-2'>
+        <h3 className='font-semibold text-lg text-[var(--foreground)] mb-2'>
+          {course.title}
+        </h3>
+        <p className='text-sm text-[var(--muted-foreground)] mb-4 line-clamp-2'>
           {course.description}
         </p>
 

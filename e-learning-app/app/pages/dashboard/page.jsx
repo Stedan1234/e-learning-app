@@ -22,13 +22,19 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
 
-  // Load courses from localStorage or fallback to default
+  const updateCourseProgress = (updatedCourse) => {
+    setCourses((prev) =>
+      prev.map((c) => (c.id === updatedCourse.id ? updatedCourse : c))
+    );
+  };
+
   useEffect(() => {
     const saved = localStorage.getItem('courses');
     setCourses(saved ? JSON.parse(saved) : coursesData);
   }, []);
 
-  // Persist to localStorage when courses update
+  
+
   useEffect(() => {
     if (courses.length > 0) {
       localStorage.setItem('courses', JSON.stringify(courses));
@@ -51,7 +57,12 @@ export default function Dashboard() {
       setCourses((prev) =>
         prev.map((course) =>
           course.id === id
-            ? { ...course, isAdded: true, status: 'not-started' }
+            ? {
+                ...course,
+                isAdded: true,
+                status: 'in-progress', // Set status to in-progress
+                progress: 0,
+              }
             : course
         )
       );
@@ -204,7 +215,7 @@ export default function Dashboard() {
           <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 [var(--color-hover)]'></div>
         </div>
       ) : (
-        <div className='courses-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+        <div className='courses-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6'>
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
               <Card
@@ -249,7 +260,7 @@ export default function Dashboard() {
         <CourseDetails
           course={selectedCourse}
           onClose={closeCourseDetails}
-          courses={courses}
+          onCourseUpdate={updateCourseProgress} // Add this prop
         />
       )}
     </div>

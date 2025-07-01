@@ -1,12 +1,27 @@
 'use client'
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
 import Card from './card';
 import CourseDetails from './CourseDetails';
 import courses from '@/data/coursesData';
+import { SignedIn, SignedOut } from '@clerk/nextjs';
+import Button from './button';
 
 const CourseInProgress = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
-  const [allCourses, setAllCourses] = useState(courses);
+  const [allCourses, setAllCourses] = useState([]);
+  const router = useRouter();
+
+  // Initialize state from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem('courses');
+    if (saved) {
+      setAllCourses(JSON.parse(saved));
+    } else {
+      // Fallback to coursesData if no localStorage
+      setAllCourses(courses);
+    }
+  }, []);
 
   const addCourse = (courseId) => {
     setAllCourses((prev) =>
@@ -36,16 +51,49 @@ const CourseInProgress = () => {
     setSelectedCourse(null);
   };
 
+  const handleLessonComplete = (courseId, lessonId) => {
+    setAllCourses((prev) =>
+      prev.map((c) => {
+        if (c.id === courseId) {
+          const updatedLessons = c.lessons.map((lesson) =>
+            lesson.id === lessonId ? { ...lesson, completed: true } : lesson
+          );
+
+          const completedCount = updatedLessons.filter(
+            (l) => l.completed
+          ).length;
+          const progress = (completedCount / updatedLessons.length) * 100;
+
+          return {
+            ...c,
+            lessons: updatedLessons,
+            progress,
+            status: progress === 100 ? 'completed' : 'in-progress',
+          };
+        }
+        return c;
+      })
+    );
+  };
+
+
+
+  // Save to localStorage when courses change
+  useEffect(() => {
+    if (allCourses.length > 0) {
+      localStorage.setItem('courses', JSON.stringify(allCourses));
+    }
+  }, [allCourses]);
+
   // Filter only in-progress courses
   const filteredCourses = allCourses.filter(
     (course) => course.isAdded && course.status === 'in-progress'
+  );
+  const updateCourse = (updatedCourse) => {
+    setAllCourses((prev) =>
+      prev.map((c) => (c.id === updatedCourse.id ? updatedCourse : c))
     );
-    
-    const updateCourse = (updatedCourse) => {
-      setAllCourses((prev) =>
-        prev.map((c) => (c.id === updatedCourse.id ? updatedCourse : c))
-      );
-    };
+  };
 
   return (
     <section className='py-12'>
@@ -86,6 +134,15 @@ const CourseInProgress = () => {
                 <p className='text-gray-600 mb-4'>
                   Start a new course to see it here!
                 </p>
+                <Button
+                  bgColor='var(--color)'
+                  hoverText='var(--background)'
+                  hoverBg='var(--color-hover)'
+                  style={{ fontSize: '16px' }}
+                  onClick={() => router.push('/pages/dashboard')}
+                >
+                  Browse Courses
+                </Button>
               </div>
             </div>
           )}

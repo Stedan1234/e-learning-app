@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import QuizComponent from './quiz';
 import YouTube from 'react-youtube';
-
 export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
@@ -17,6 +16,10 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
     const currentTime = event.target.getCurrentTime();
     const percent = (currentTime / duration) * 100;
     setVideoProgress(percent);
+  };
+
+  const handleMarkComplete = () => {
+    onLessonCompleted(lesson.id);
   };
 
   return (
@@ -68,7 +71,7 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
       {(!lesson.quiz || lesson.quiz.length === 0) && (
         <div className='mt-6 text-center'>
           <button
-            onClick={() => onLessonCompleted(lesson.id)}
+            onClick={handleMarkComplete} // Use the new handler
             className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'
           >
             Mark Lesson as Completed
