@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import Card from './card';
@@ -56,9 +56,10 @@ const CourseInProgress = () => {
       prev.map((c) => {
         if (c.id === courseId) {
           const updatedLessons = c.lessons.map((lesson) =>
-            lesson.id === lessonId ? { ...lesson, completed: true } : lesson
+            lesson.id === lessonId
+              ? { ...lesson, completed: true, status: 'completed' }
+              : lesson
           );
-
           const completedCount = updatedLessons.filter(
             (l) => l.completed
           ).length;
@@ -75,8 +76,6 @@ const CourseInProgress = () => {
       })
     );
   };
-
-
 
   // Save to localStorage when courses change
   useEffect(() => {
@@ -108,7 +107,7 @@ const CourseInProgress = () => {
                 onAdd={addCourse}
                 onRemove={removeCourse}
                 onView={handleViewCourse}
-                showAddButton={false}
+                showAddButton={true}
               />
             ))
           ) : (

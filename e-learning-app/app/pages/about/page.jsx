@@ -37,7 +37,7 @@ const AboutUs = () => {
                 <div className='flex items-center'>
                   <div className='w-16 h-16 relative rounded-xl overflow-hidden border-2 border-gray-200'>
                     <Image
-                      src='/images/default-avatar.png' // Replace with member.image if you add image keys
+                      src={member.image}
                       alt={member.name}
                       layout='fill'
                       objectFit='cover'

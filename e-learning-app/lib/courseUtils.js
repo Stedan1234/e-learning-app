@@ -1,10 +1,10 @@
 // Utility functions for course management
 
-export const getInProgressCourses = (courses) =>
-    courses.filter(course => course.status === "in-progress");
+// export const getInProgressCourses = (courses) =>
+//     courses.filter(course => course.status === "in-progress");
 
-export const getCompletedCourses = (courses) =>
-    courses.filter(course => course.status === "completed");
+// export const getCompletedCourses = (courses) =>
+//     courses.filter(course => course.status === "completed");
 
 export const getNotStartedCourses = (courses) =>
     courses.filter(course => course.status === "not-started");
@@ -14,8 +14,8 @@ export const getRecommendedCourses = (courses) =>
 
 export const getAllCourses = (courses) => courses;
 
-export const getUserCourses = (courses) =>
-    courses.filter(course => course.isAdded);
+// export const getUserCourses = (courses) =>
+//     courses.filter(course => course.isAdded);
 
 export const getCourseById = (courses, id) =>
     courses.find(course => course.id === parseInt(id));
@@ -27,6 +27,23 @@ export const searchCourses = (courses, searchTerm) =>
         course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         course.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
+export const getLessonById = (courseId, lessonId) => {
+    const course = coursesData.find(c => c.id === courseId);
+    if (!course) return null;
+    return course.lessons.find(l => l.id === lessonId) || null;
+};
+
+export const updateLessonStatus = (courseId, lessonId, status) => {
+    const course = coursesData.find(c => c.id === courseId);
+    if (!course) return;
+
+    const lesson = course.lessons.find(l => l.id === lessonId);
+    if (lesson) {
+        lesson.status = status;
+    }
+};
+      
 
     
 
@@ -56,3 +73,16 @@ export const markLessonComplete = (courses, courseId, lessonId) =>
         }
         return course;
     });
+
+
+export const getUserCourses = (courses) => {
+    return courses.filter(course => course.isAdded);
+};
+
+export const getInProgressCourses = (courses) => {
+    return courses.filter(course => course.isAdded && course.status === 'in-progress');
+};
+
+export const getCompletedCourses = (courses) => {
+    return courses.filter(course => course.isAdded && course.status === 'completed');
+      };

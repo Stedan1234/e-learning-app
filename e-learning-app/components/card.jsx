@@ -1,21 +1,25 @@
 'use client';
 import Image from 'next/image';
+import { useState } from 'react';
 export default function Card({
   course,
-  onAdd,
-  onRemove,
+  onAdd, 
+  onRemove, 
   showAddButton,
   onView,
 }) {
-
-  const handleViewCourse = (e) => {
-    e.stopPropagation();
-    onView(course);
+    const [selectedCourse, setSelectedCourse] = useState(null);
+  
+  const handleViewCourse = (course) => {
+    setSelectedCourse(course);
   };
+
   return (
+
+    
     <div
       className='bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer transition hover:shadow-md'
-      onClick={handleViewCourse} // Re-enable click handler
+      onClick={() => onView(course)}
       role='button'
     >
       {/* Course Thumbnail */}
@@ -25,7 +29,7 @@ export default function Card({
             src={course.thumbnail}
             alt={course.title}
             layout='fill'
-            objectFit='cover'
+            objectFit='fill'
           />
         ) : (
           <div className='flex items-center justify-center w-full h-full text-[var(--muted-foreground)]'>
@@ -45,7 +49,6 @@ export default function Card({
         <p className='text-sm text-[var(--muted-foreground)] mb-4 line-clamp-2'>
           {course.description}
         </p>
-
         {/* Progress bar for enrolled courses */}
         {course.isAdded && course.status === 'in-progress' && (
           <div className='mt-4'>
@@ -61,15 +64,13 @@ export default function Card({
             </div>
           </div>
         )}
-
         {/* Action buttons */}
         <div className='mt-4 flex justify-end gap-2'>
           <button
-            onClick={handleViewCourse}
-            className='px-3 py-1 bg-gray-100 text-gray-800 hover:bg-gray-200 rounded text-sm transition-colors'
-            type='button'
+            onClick={() => handleViewCourse(course)}
+            className='px-3 py-1 bg-[var(--muted)] text-[var(--foreground)] hover:bg-[var(--color-hover)] rounded text-sm transition-colors flex-1'
           >
-            View Course
+            View Details
           </button>
           {course.isAdded ? (
             <button

@@ -3,6 +3,7 @@ export const teamMembers = [
     {
         id: 1,
         name: 'Stedan Ampofo',
+        image: '/team/stedan.jpg',
         role: 'Frontend Developer',
         description:
             'Specializes in React and modern JavaScript frameworks. Creates responsive and accessible user interfaces.',
@@ -13,6 +14,7 @@ export const teamMembers = [
     {
         id: 2,
         name: 'Gilbert',
+        image: '/team/gil.jpg',
         role: 'UX Designer',
         description:
             'Passionate about user-centered design and creating intuitive experiences. Expert in Figma and Adobe XD.',
@@ -22,6 +24,7 @@ export const teamMembers = [
     {
         id: 3,
         name: 'Boaz Kyei',
+        image: '/team/boaz.jpg',
         role: 'Backend Engineer',
         description:
             'Develops scalable server architectures using Node.js and Python. Focuses on security and performance optimization.',
@@ -31,6 +34,7 @@ export const teamMembers = [
     {
         id: 4,
         name: 'Chief',
+        image: '/team/chief.jpg',
         role: 'DevOps Specialist',
         description:
             'Implements CI/CD pipelines and cloud infrastructure. AWS Certified Solutions Architect.',
@@ -40,6 +44,7 @@ export const teamMembers = [
     {
         id: 5,
         name: 'Ezekiel',
+        image: '/team/kiel.jpg',
         role: 'Product Manager',
         description:
             'Bridges technical and business requirements. Agile certified with 8+ years of product leadership experience.',

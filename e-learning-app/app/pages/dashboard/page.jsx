@@ -19,27 +19,15 @@ export default function Dashboard() {
   const [courses, setCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Start as true
   const [selectedCourse, setSelectedCourse] = useState(null);
+  const [isInitializing, setIsInitializing] = useState(true);
 
   const updateCourseProgress = (updatedCourse) => {
     setCourses((prev) =>
       prev.map((c) => (c.id === updatedCourse.id ? updatedCourse : c))
     );
   };
-
-  useEffect(() => {
-    const saved = localStorage.getItem('courses');
-    setCourses(saved ? JSON.parse(saved) : coursesData);
-  }, []);
-
-  
-
-  useEffect(() => {
-    if (courses.length > 0) {
-      localStorage.setItem('courses', JSON.stringify(courses));
-    }
-  }, [courses]);
 
   const handleViewCourse = (course) => {
     setSelectedCourse(course);
@@ -60,7 +48,7 @@ export default function Dashboard() {
             ? {
                 ...course,
                 isAdded: true,
-                status: 'in-progress', // Set status to in-progress
+                status: 'in-progress',
                 progress: 0,
               }
             : course
@@ -69,6 +57,29 @@ export default function Dashboard() {
       setIsLoading(false);
     }, 500);
   };
+
+  useEffect(() => {
+    const saved = localStorage.getItem('courses');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setCourses(parsed);
+      } catch (e) {
+        console.error('Error parsing saved courses:', e);
+        setCourses(coursesData);
+      }
+    } else {
+      setCourses(coursesData);
+    }
+    setIsInitializing(false);
+    setIsLoading(false); 
+  }, []);
+
+  useEffect(() => {
+    if (courses.length > 0 && !isInitializing) {
+      localStorage.setItem('courses', JSON.stringify(courses));
+    }
+  }, [courses, isInitializing]);
 
   const removeCourse = (id) => {
     setCourses((prev) =>
@@ -81,20 +92,22 @@ export default function Dashboard() {
   };
 
   const getFilteredCourses = () => {
-    let filtered = [];
+    if (courses.length === 0) return [];
+
+    let filtered = [...courses];
 
     switch (activeTab) {
       case 'my':
-        filtered = getUserCourses(courses);
+        filtered = getUserCourses(filtered);
         break;
       case 'in-progress':
-        filtered = getInProgressCourses(courses);
+        filtered = getInProgressCourses(filtered);
         break;
       case 'completed':
-        filtered = getCompletedCourses(courses);
+        filtered = getCompletedCourses(filtered);
         break;
       default:
-        filtered = getAllCourses(courses);
+        break;
     }
 
     if (searchTerm) filtered = searchCourses(filtered, searchTerm);
@@ -103,6 +116,14 @@ export default function Dashboard() {
 
     return filtered;
   };
+
+  if (isInitializing) {
+    return (
+      <div className='flex justify-center items-center min-h-screen'>
+        <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[var(--color-hover)]'></div>
+      </div>
+    );
+  }
 
   const stats = {
     total: courses.length,

@@ -13,7 +13,7 @@ const courses = [
                 id: 101,
                 title: "What is Automata?",
                 status: "not-started",
-                videoId: "https://www.youtube.com/embed/WQ8bJooiEeQ?si=_a4D4NX2zmqqb_RA",
+                videoId: "WQ8bJooiEeQ",
                 duration: "12:45",
                 description: "Intro to machines that accept languages.",
                 quiz: [
@@ -73,7 +73,7 @@ const courses = [
                 id: 102,
                 title: "DFA vs NFA",
                 status: "not-started",
-                videoId: "https://www.youtube.com/embed/Iww3pI4PI1s?si=YFQE3pbuwUOD6Mur",
+                videoId: "Iww3pI4PI1s",
                 duration: "10:30",
                 description: "Differences between DFA and NFA.",
                 quiz: []
@@ -94,7 +94,7 @@ const courses = [
                 id: 201,
                 title: "OSI Model Explained",
                 status: "not-started",
-                videoId: "https://youtu.be/qBXmbJZQ5rY?si=zPTw10Ey7gCSREFb",
+                videoId: "qBXmbJZQ5rY",
                 duration: "15:00",
                 description: "Overview of all 7 layers of OSI.",
                 quiz: [
@@ -144,7 +144,7 @@ const courses = [
                 id: 202,
                 title: "IP Addressing",
                 status: "not-started",
-                videoId: "https://youtu.be/Kx6i9gwNS3w?si=Jf6h6haFUQbzrEIH",
+                videoId: "Kx6i9gwNS3w",
                 duration: "13:15",
                 description: "Basics of IPv4 and IPv6.",
                 quiz: []
@@ -165,7 +165,7 @@ const courses = [
                 id: 301,
                 title: "What is a Database?",
                 status: "not-started",
-                videoId: "https://youtu.be/6Iu45VZGQDk?si=YgN1qMlu5kiPD8Ik",
+                videoId: "6Iu45VZGQDk",
                 duration: "13:40",
                 description: "Definition and real-world examples.",
                 quiz: [
@@ -220,7 +220,7 @@ const courses = [
                 id: 302,
                 title: "SQL Basics",
                 status: "not-started",
-                videoId: "https://youtu.be/HXV3zeQKqGY?si=5hnihzX7HMqK5bdH",
+                videoId: "HXV3zeQKqGY",
                 duration: "17:10",
                 description: "Simple SQL queries and data types.",
                 quiz: []
@@ -241,7 +241,7 @@ const courses = [
                 id: 401,
                 title: "SDLC Overview",
                 status: "not-started",
-                videoId: "https://youtu.be/Fi3_BjVzpqk?si=zaGBAw3Ob6tLy0L5",
+                videoId: "Fi3_BjVzpqk",
                 duration: "11:00",
                 description: "Software Development Life Cycle models.",
                 quiz: [
@@ -296,7 +296,7 @@ const courses = [
                 id: 402,
                 title: "Agile vs Waterfall",
                 status: "not-started",
-                videoId: "https://youtu.be/5RocT_OdQcA?si=OtPUF5Gp_bVCB8ky",
+                videoId: "5RocT_OdQcA",
                 duration: "16:20",
                 description: "Comparison of two popular methods.",
                 quiz: []
@@ -317,7 +317,7 @@ const courses = [
                 id: 501,
                 title: "Hardware vs Software",
                 status: "not-started",
-                videoId: "https://youtu.be/vG_qmtdBPTU?si=VnFWTgVpcVheYOS2",
+                videoId: "vG_qmtdBPTU",
                 duration: "09:50",
                 description: "Understanding the basics.",
                 quiz: [
@@ -357,7 +357,7 @@ const courses = [
                 id: 502,
                 title: "System Components",
                 status: "not-started",
-                videoId: "https://youtu.be/peas75zRolo?si=8ibFl4gHPhgYWRZ0le10",
+                videoId: "peas75zRolo",
                 duration: "12:30",
                 description: "CPU, RAM, storage, etc.",
                 quiz: []
@@ -378,7 +378,7 @@ const courses = [
                 id: 601,
                 title: "OOP Concepts",
                 status: "not-started",
-                videoId: "https://youtu.be/pTB0EiLXUC8?si=nwLVqRDYeZBJZWvR",
+                videoId: "pTB0EiLXUC8",
                 duration: "10:10",
                 description: "Classes, objects, inheritance, etc.",
                 quiz: [
@@ -438,7 +438,7 @@ const courses = [
                 id: 602,
                 title: "UML Diagrams",
                 status: "not-started",
-                videoId: "https://youtu.be/WnMQ8HlmeXc?si=xhhWNsY4RI5ARtXW",
+                videoId: "WnMQ8HlmeXc",
                 duration: "11:25",
                 description: "Types of UML diagrams and uses.",
                 quiz: []
@@ -459,7 +459,7 @@ const courses = [
                 id: 701,
                 title: "What is an OS?",
                 status: "not-started",
-                videoId: "https://youtu.be/yK1uBHPdp30?si=Jq2PY2C9bazs5mTO",
+                videoId: "yK1uBHPdp30",
                 duration: "08:55",
                 description: "Role of operating systems.",
                 quiz: [
@@ -514,7 +514,7 @@ const courses = [
                 id: 702,
                 title: "Memory Management",
                 status: "not-started",
-                videoId: "https://youtu.be/RhNWpUrO5MQ?si=rd0wNiOLPeHEBcWj",
+                videoId: "RhNWpUrO5MQ",
                 duration: "11:25",
                 description: "How OS handles memory.",
                 quiz: []
@@ -535,7 +535,7 @@ const courses = [
                 id: 801,
                 title: "Intro to Scripting",
                 status: "not-started",
-                videoId: "https://youtu.be/dWisUXms3Sw?si=UPI4cD38Z1ZdYCJ_",
+                videoId: "dWisUXms3Sw",
                 duration: "11:25",
                 description: "Why scripting matters.",
                 quiz: [
@@ -580,7 +580,7 @@ const courses = [
                 id: 802,
                 title: "Writing Shell Scripts",
                 status: "not-started",
-                videoId: "samphttps://youtu.be/GtovwKDemnI?si=5-NSxEv03la-JjOtle16",
+                videoId: "GtovwKDemnI",
                 duration: "11:25",
                 description: "Basic syntax and commands.",
                 quiz: []
@@ -601,7 +601,7 @@ const courses = [
                 id: 901,
                 title: "What is the Cloud?",
                 status: "not-started",
-                videoId: "https://youtu.be/RWgW-CgdIk0?si=4mueMuAv7vFvVy5s",
+                videoId: "RWgW-CgdIk0",
                 duration: "09:50",
                 description: "Cloud basics and models.",
                 quiz: [
@@ -651,7 +651,7 @@ const courses = [
                 id: 902,
                 title: "Virtualization",
                 status: "not-started",
-                videoId: "https://youtu.be/FZR0rG3HKIk?si=aq25ANFLpytCrPkO",
+                videoId: "FZR0rG3HKIk",
                 duration: "12:30",
                 description: "Using VMs and containers.",
                 quiz: []
@@ -672,7 +672,7 @@ const courses = [
                 id: 1001,
                 title: "Intro to Critical Thinking",
                 status: "not-started",
-                videoId: "https://youtu.be/RyqFD5OAJ40?si=7YAALHym9fbK-chw",
+                videoId: "RyqFD5OAJ40",
                 duration: "14:20",
                 description: "Thinking clearly and logically.",
                 quiz: [
@@ -727,7 +727,7 @@ const courses = [
                 id: 1002,
                 title: "Logical Fallacies",
                 status: "not-started",
-                videoId: "https://youtu.be/vA_lM-2fpW0?si=-slSCD850qFvY4zH",
+                videoId: "vA_lM-2fpW0",
                 duration: "17:10",
                 description: "Common errors in reasoning.",
                 quiz: []

@@ -1,11 +1,22 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import QuizComponent from './quiz';
 import YouTube from 'react-youtube';
+
+
 export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
 
+  const videoId = lesson.videoId;
+
+  if (!lesson) {
+    return (
+      <div className='lesson-player bg-white rounded-xl shadow-md p-6'>
+        <div className='text-center py-8'>Select a lesson to begin</div>
+      </div>
+    );
+  }
   const handleQuizComplete = (result) => {
     setQuizCompleted(true);
     console.log('Quiz Results:', result);
@@ -27,13 +38,11 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
       <div className='video-container mb-6'>
         <div className='aspect-w-16 aspect-h-9 rounded-lg overflow-hidden'>
           <YouTube
+            key={lesson.videoId}
             videoId={lesson.videoId}
             opts={{
               width: '100%',
               height: '100%',
-              playerVars: {
-                autoplay: 0,
-              },
             }}
             onStateChange={onPlayerStateChange}
           />
@@ -71,7 +80,7 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
       {(!lesson.quiz || lesson.quiz.length === 0) && (
         <div className='mt-6 text-center'>
           <button
-            onClick={handleMarkComplete} // Use the new handler
+            onClick={handleMarkComplete}
             className='px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700'
           >
             Mark Lesson as Completed

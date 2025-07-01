@@ -3,35 +3,41 @@ import React, { useState, useEffect } from 'react';
 import LessonPlayer from './LessonPlayer';
 import courses from '@/data/coursesData';
 import Image from 'next/image';
+import { getLessonById, updateLessonStatus } from '@/lib/courseUtils';
+import { AiOutlineClose } from 'react-icons/ai';
 
 export default function CourseDetails({ course, onClose, onCourseUpdate }) {
   const [currentCourse, setCurrentCourse] = useState(course);
   const [selectedLesson, setSelectedLesson] = useState(null);
 
+  useEffect(() => {
+    // Initialize selected lesson to the first lesson
+    if (currentCourse && currentCourse.lessons.length > 0) {
+      setSelectedLesson(currentCourse.lessons[0]);
+    }
+  }, [currentCourse]);
+
   const handleLessonComplete = (lessonId) => {
-    const updatedLessons = currentCourse.lessons.map((lesson) =>
-      lesson.id === lessonId ? { ...lesson, status: 'completed' } : lesson
-    );
+
+    updateLessonStatus(course.id, lessonId, 'completed');
 
     const updatedCourse = { ...currentCourse, lessons: updatedLessons };
     setCurrentCourse(updatedCourse);
 
     if (onCourseUpdate) {
+      const updatedCourse = { ...course };
       onCourseUpdate(updatedCourse);
     }
   };
 
-  // Find related courses by category, excluding the current course
   const relatedCourses = courses.filter(
     (c) => c.category === course.category && c.id !== course.id
   );
 
-  // Handle lesson selection
   const handleLessonSelect = (lesson) => {
     setSelectedLesson(lesson);
   };
 
-  // Helper function to calculate course progress
   const calculateCourseProgress = (course) => {
     const totalLessons = course.lessons.length;
     const completedLessons = course.lessons.filter(
@@ -51,30 +57,15 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
     }));
   }, [currentCourse.lessons]);
 
-
   return (
     <div className='fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-center p-4'>
-      {' '}
       <div className='bg-white rounded-xl max-w-6xl w-full max-h-[90vh] overflow-y-auto'>
         <div className='p-6 relative'>
           <button
             onClick={onClose}
-            className='fixed top-4 right-4 hover:text-gray-500 text-[var(--background)] rounded-full p-2 transition-colors'
+            className='fixed top-4 right-4 text-[var(--color-hover)] hover:text-gray-500 rounded-full p-5 transition-colors'
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              className='h-6 w-6'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke='currentColor'
-            >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M6 18L18 6M6 6l12 12'
-              />
-            </svg>
+            <AiOutlineClose />
           </button>
 
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
@@ -83,19 +74,19 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
               <div className='flex justify-between items-start mb-4'>
                 <div>
                   <h1 className='text-3xl font-bold text-gray-800'>
-                    {course.title}
+                    {currentCourse.title}
                   </h1>
                   <div className='flex items-center mt-2'>
                     <div className='bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full'>
-                      {course.category.toUpperCase()}
+                      {currentCourse.category.toUpperCase()}
                     </div>
                     <div className='ml-3 flex items-center'>
                       <span className='text-yellow-500 mr-1'>★</span>
                       <span className='text-sm font-medium text-gray-700'>
-                        {course.rating || '4.8'}
+                        {currentCourse.rating || '4.8'}
                       </span>
                       <span className='text-sm text-gray-500 ml-1'>
-                        ({course.ratingsCount || '12'} ratings)
+                        ({currentCourse.ratingsCount || '12'} ratings)
                       </span>
                     </div>
                   </div>
@@ -103,10 +94,16 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
               </div>
 
               <div className='flex items-center mb-6'>
-                <div className='bg-gray-200 border-2 border-dashed rounded-xl w-12 h-12' />
+                  <Image
+                    src='/drFreeman.jpeg'
+                    alt='Dr. Freeman'
+                    width={100}
+                    height={100}
+                    className='bg-gray-200 border-2 border-dashed rounded-xl'
+                  />
                 <div className='ml-3'>
                   <h3 className='font-medium text-gray-800'>
-                    {course.instructor || 'Steven Arnatouvic'}
+                    {currentCourse.instructor || 'Prof. Freeman'}
                   </h3>
                   <p className='text-sm text-gray-600'>
                     Development / Mobile Engineer
@@ -116,7 +113,7 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
 
               <div className='bg-gray-50 rounded-lg p-4 mb-6'>
                 <h2 className='text-xl font-bold mb-3'>Course Overview</h2>
-                <p className='text-gray-700'>{course.description}</p>
+                <p className='text-gray-700'>{currentCourse.description}</p>
               </div>
 
               {/* Curriculum section */}
@@ -169,9 +166,10 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
               {/* Lesson Player Section */}
               {selectedLesson && (
                 <LessonPlayer
+                  key={selectedLesson.id} // Add this key
                   lesson={selectedLesson}
                   course={currentCourse}
-                  onLessonCompleted={handleLessonComplete} 
+                  onLessonCompleted={handleLessonComplete}
                 />
               )}
             </div>
@@ -185,7 +183,13 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
                     key={rc.id}
                     className='flex items-start gap-3 p-3 bg-white rounded-lg border border-gray-200 hover:shadow-md transition-shadow'
                   >
-                    <div className='bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16' />
+                      <Image
+                        src={rc.thumbnail || '/drFreeman.jpeg'}
+                        alt={rc.title}
+                        width={100}
+                        height={100}
+                        className='bg-gray-200 border-2 border-dashed rounded-xl'
+                      />
                     <div className='flex-1'>
                       <h4 className='font-medium text-gray-800'>{rc.title}</h4>
                       <p className='text-sm text-gray-600'>{rc.category}</p>
