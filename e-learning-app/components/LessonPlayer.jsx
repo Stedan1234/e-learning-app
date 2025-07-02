@@ -9,10 +9,7 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
   const YouTube = dynamic(() => import('react-youtube'), { ssr: false });
   const videoId = lesson.videoId;
 
-  // if (!videoId || videoId.length !== 11) {
-  //   console.error('Invalid videoId:', videoId);
-  //   return <p>Video not available</p>;
-  // }
+
 
   if (!lesson) {
     return (
