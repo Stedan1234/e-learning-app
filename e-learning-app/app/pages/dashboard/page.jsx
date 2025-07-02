@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import coursesData from '@/data/coursesData';
-import Card from '@/components/card';
+import Card from '@/app/pages/components/card';
 import {
   getAllCourses,
   getUserCourses,
@@ -10,8 +10,8 @@ import {
   searchCourses,
   getCoursesByCategory,
 } from '@/lib/courseUtils';
-import CourseDetails from '@/components/CourseDetails';
-import UpdateBanner from '@/components/updateBanner';
+import CourseDetails from '@/app/pages/components/CourseDetails';
+import UpdateBanner from '@/app/pages/components/updateBanner';
 
 const TABS = ['all', 'my', 'in-progress', 'completed'];
 

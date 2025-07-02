@@ -1,5 +1,5 @@
 import React from 'react';
-import { ContactForm } from '@/components/contactForm';
+import { ContactForm } from '@/app/pages/components/contactForm';
 import { FaWhatsapp } from 'react-icons/fa';
 import Link from 'next/link';
 

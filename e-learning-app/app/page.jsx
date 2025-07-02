@@ -1,7 +1,7 @@
-import UpdateBanner from '@/components/updateBanner';
-import HomeHero from '@/components/homeHero';
-import CourseInProgress from '@/components/CourseInProgress';
-import TrendingCourses from '@/components/TrendingCourses';
+import UpdateBanner from '@/app/pages/components/updateBanner';
+import HomeHero from '@/app/pages/components/homeHero';
+import CourseInProgress from '@/app/pages/components/CourseInProgress';
+import TrendingCourses from '@/app/pages/components/TrendingCourses';
 import { SignedIn, SignedOut } from '@clerk/nextjs';
 
 export default function Home() {

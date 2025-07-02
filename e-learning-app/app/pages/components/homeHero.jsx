@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import heroImg from '@/public/heroImg.png';
-import Button from '@/components/button';
+import Button from '@/app/pages/components/button';
 import { useRouter } from 'next/navigation';
 import { SignedIn, SignedOut, SignUpButton } from '@clerk/nextjs';
 
