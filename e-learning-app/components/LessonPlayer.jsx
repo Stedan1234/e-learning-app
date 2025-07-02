@@ -6,8 +6,7 @@ import YouTube from 'react-youtube';
 export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  // const YouTube = dynamic(() => import('react-youtube'), { ssr: false });
-  // const videoId = lesson.videoId;
+
 
 
 
