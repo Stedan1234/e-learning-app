@@ -14,7 +14,7 @@ Welcome to the E-Learning App! This project is designed to provide an interactiv
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/e-learning-app.git
+    git clone https://github.com/Stedan1234/e-learning-app.git
     ```
 2. **Install dependencies:**
     ```bash
@@ -23,7 +23,7 @@ Welcome to the E-Learning App! This project is designed to provide an interactiv
     ```
 3. **Start the development server:**
     ```bash
-    npm start
+    npm run dev
     ```
 
 ## Technologies Used
