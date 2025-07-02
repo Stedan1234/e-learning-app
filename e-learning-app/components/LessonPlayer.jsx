@@ -1,13 +1,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import QuizComponent from './quiz';
-import dynamic from 'next/dynamic';
+import YouTube from 'react-youtube';
 
 export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
-  const YouTube = dynamic(() => import('react-youtube'), { ssr: false });
-  const videoId = lesson.videoId;
+  // const YouTube = dynamic(() => import('react-youtube'), { ssr: false });
+  // const videoId = lesson.videoId;
 
 
 
