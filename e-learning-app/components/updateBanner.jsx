@@ -3,7 +3,7 @@ import React from 'react';
 import Button from './button';
 const UpdateBanner = () => {
   return (
-    <div className='flex flex-row justify-between items-center m-auto w-full bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md mb-4 max-md:flex-col max-md:items-start max-md:gap-4'>
+    <div className='flex flex-row justify-between items-center mx-auto w-full bg-blue-100 text-blue-800 p-4 rounded-lg shadow-md m-8 max-md:flex-col max-md:items-start max-md:gap-4'>
       <div className=' '>
         <h2 className='text-lg font-semibold'>
           Join and get all updates on new courses{' '}

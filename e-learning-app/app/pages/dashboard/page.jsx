@@ -11,6 +11,7 @@ import {
   getCoursesByCategory,
 } from '@/lib/courseUtils';
 import CourseDetails from '@/components/CourseDetails';
+import UpdateBanner from '@/components/updateBanner';
 
 const TABS = ['all', 'my', 'in-progress', 'completed'];
 
@@ -284,6 +285,8 @@ export default function Dashboard() {
           onCourseUpdate={updateCourseProgress} // Add this prop
         />
       )}
+
+      <UpdateBanner/>
     </div>
   );
 }
