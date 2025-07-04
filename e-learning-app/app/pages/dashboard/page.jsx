@@ -20,7 +20,7 @@ export default function Dashboard() {
   const [courses, setCourses] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [isLoading, setIsLoading] = useState(true); // Start as true
+  const [isLoading, setIsLoading] = useState(true); 
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [isInitializing, setIsInitializing] = useState(true);
 
@@ -64,7 +64,16 @@ export default function Dashboard() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setCourses(parsed);
+
+        // Merge new courses with saved progress
+        const mergedCourses = coursesData.map((newCourse) => {
+          const savedCourse = parsed.find((c) => c.id === newCourse.id);
+          return savedCourse
+            ? { ...newCourse, ...savedCourse } // Keep saved progress
+            : newCourse; 
+        });
+
+        setCourses(mergedCourses);
       } catch (e) {
         console.error('Error parsing saved courses:', e);
         setCourses(coursesData);
@@ -73,9 +82,8 @@ export default function Dashboard() {
       setCourses(coursesData);
     }
     setIsInitializing(false);
-    setIsLoading(false); 
+    setIsLoading(false);
   }, []);
-
   useEffect(() => {
     if (courses.length > 0 && !isInitializing) {
       localStorage.setItem('courses', JSON.stringify(courses));

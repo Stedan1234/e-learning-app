@@ -733,7 +733,284 @@ const courses = [
                 quiz: []
             }
         ]
+    },
+    {
+        id: 11,
+        title: "UI/UX Design",
+        description: "Master user interface and user experience design fundamentals",
+        category: "design",
+        progress: 0,
+        status: "not-started",
+        isAdded: false,
+        thumbnail: "/thumbnails/uiux.jpg",
+        lessons: [
+            {
+                id: 1101,
+                title: "Introduction to UI/UX",
+                status: "not-started",
+                videoId: "55NvZjUZIO8",
+                duration: "12:45",
+                description: "Understanding what UI/UX design entails.",
+                quiz: [
+                    {
+                        question: "What does UI stand for?",
+                        options: ["User Intelligence", "User Interface", "Unique Interaction", "Universal Input"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which focuses on user emotions and experience?",
+                        options: ["UI", "UX", "Backend", "Frontend"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which tool is commonly used for UI design?",
+                        options: ["React", "Node.js", "Figma", "MySQL"],
+                        answer: 2
+                    }
+                ]
+            },
+            {
+                id: 1102,
+                title: "Design Principles",
+                status: "not-started",
+                videoId: "NTmh8l-Xl4c",
+                duration: "18:20",
+                description: "Core design principles for effective interfaces.",
+                quiz: []
+            }
+        ]
+    },
+    {
+        id: 12,
+        title: "Frontend Development",
+        description: "Learn to build beautiful and functional web interfaces",
+        category: "web development",
+        progress: 0,
+        status: "not-started",
+        isAdded: false,
+        thumbnail: "/thumbnails/frontend.jpg",
+        lessons: [
+            {
+                id: 1201,
+                title: "HTML & CSS Basics",
+                status: "not-started",
+                videoId: "G3e‑cpL7ofc",
+                duration: "15:00",
+                description: "Fundamentals of building web pages.",
+                quiz: [
+                    {
+                        question: "What does HTML stand for?",
+                        options: ["Hyper Trainer Markup Language", "Hyper Text Markup Language", "Hyper Text Markdown Language", "Hyperlink Text Mark Language"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which property changes text color in CSS?",
+                        options: ["font-style", "color", "text-color", "background-color"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which HTML tag is used for links?",
+                        options: ["<link>", "<a>", "<href>", "<ul>"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 1202,
+                title: "JavaScript Fundamentals",
+                status: "not-started",
+                videoId: "EerdGm-ehJQ",
+                duration: "20:10",
+                description: "Introduction to JavaScript programming.",
+                quiz: []
+            }
+        ]
+    },
+    {
+        id: 13,
+        title: "Backend Development",
+        description: "Learn to build server-side applications and APIs",
+        category: "web development",
+        progress: 0,
+        status: "not-started",
+        isAdded: false,
+        thumbnail: "/thumbnails/backend.jpg",
+        lessons: [
+            {
+                id: 1301,
+                title: "Introduction to Backend",
+                status: "not-started",
+                videoId: "1oTuMPIwHmk",
+                duration: "16:30",
+                description: "What is backend development?",
+                quiz: [
+                    {
+                        question: "Which language is popular for backend development?",
+                        options: ["HTML", "CSS", "Node.js", "Figma"],
+                        answer: 2
+                    },
+                    {
+                        question: "What does API stand for?",
+                        options: ["Application Programming Interface", "Advanced Programming Integration", "Applied Program Information", "Application Protocol Internet"],
+                        answer: 0
+                    },
+                    {
+                        question: "Which database is NoSQL?",
+                        options: ["MySQL", "PostgreSQL", "MongoDB", "SQLite"],
+                        answer: 2
+                    }
+                ]
+            },
+            {
+                id: 1302,
+                title: "Node.js Basics",
+                status: "not-started",
+                videoId: "f2EqECiTBL8",
+                duration: "19:45",
+                description: "Building backend with Node.js.",
+                quiz: []
+            }
+        ]
+    },
+    {
+        id: 14,
+        title: "Full Stack Development",
+        description: "Become a full stack developer with frontend and backend skills",
+        category: "web development",
+        progress: 0,
+        status: "not-started",
+        isAdded: false,
+        thumbnail: "/thumbnails/fullstack.jpg",
+        lessons: [
+            {
+                id: 1401,
+                title: "What is Full Stack?",
+                status: "not-started",
+                videoId: "7NaeDBTRY1k",
+                duration: "13:50",
+                description: "Understanding full stack development roles.",
+                quiz: [
+                    {
+                        question: "Full stack developers work on?",
+                        options: ["Frontend only", "Backend only", "Both frontend and backend", "UI design only"],
+                        answer: 2
+                    },
+                    {
+                        question: "Which stack uses MERN?",
+                        options: ["MySQL, Express, React, Node", "MongoDB, Express, React, Node", "MongoDB, Ember, React, Next.js", "MongoDB, Express, Redux, Node"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which of these is a frontend framework?",
+                        options: ["Node.js", "Express.js", "React.js", "MongoDB"],
+                        answer: 2
+                    }
+                ]
+            },
+            {
+                id: 1402,
+                title: "Deploying Full Stack Apps",
+                status: "not-started",
+                videoId: "nQdyiK7-VlQ",
+                duration: "21:15",
+                description: "Deploying full stack applications to the cloud.",
+                quiz: []
+            }
+        ]
+    },
+    {
+        id: 15,
+        title: "Data Analysis",
+        description: "Learn to analyze data for business insights",
+        category: "data science",
+        progress: 0,
+        status: "not-started",
+        isAdded: false,
+        thumbnail: "/thumbnails/dataanalysis.jpg",
+        lessons: [
+            {
+                id: 1501,
+                title: "Introduction to Data Analysis",
+                status: "not-started",
+                videoId: "ziQEqGZB8GE",
+                duration: "14:40",
+                description: "What is data analysis and its importance?",
+                quiz: [
+                    {
+                        question: "Which tool is popular for data analysis?",
+                        options: ["Photoshop", "Excel", "HTML", "Figma"],
+                        answer: 1
+                    },
+                    {
+                        question: "What is a dataset?",
+                        options: ["A set of designs", "A collection of data", "A code snippet", "A database system"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which language is widely used for data analysis?",
+                        options: ["JavaScript", "Python", "CSS", "PHP"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 1502,
+                title: "Data Visualization",
+                status: "not-started",
+                videoId: "DwR0SZTBMTU",
+                duration: "17:35",
+                description: "Presenting data visually for better insights.",
+                quiz: []
+            }
+        ]
+    },
+    {
+        id: 16,
+        title: "Augmented Reality",
+        description: "Explore the world of AR and its applications",
+        category: "technology",
+        progress: 0,
+        status: "not-started",
+        isAdded: false,
+        thumbnail: "/thumbnails/ar.jpg",
+        lessons: [
+            {
+                id: 1601,
+                title: "Introduction to AR",
+                status: "not-started",
+                videoId: "0fZBqV_yMq4",
+                duration: "13:10",
+                description: "What is augmented reality?",
+                quiz: [
+                    {
+                        question: "What does AR stand for?",
+                        options: ["Applied Reality", "Augmented Reality", "Artificial Reality", "Advanced Rendering"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which is an AR application?",
+                        options: ["WhatsApp", "Pokemon Go", "Facebook", "Gmail"],
+                        answer: 1
+                    },
+                    {
+                        question: "Which device is commonly used for AR?",
+                        options: ["VR headset", "AR glasses", "Smartwatch", "Speaker"],
+                        answer: 1
+                    }
+                ]
+            },
+            {
+                id: 1602,
+                title: "AR Development Tools",
+                status: "not-started",
+                videoId: "yGfQkq_pKcE",
+                duration: "18:00",
+                description: "Tools used to build AR applications.",
+                quiz: []
+            }
+        ]
     }
+
 ];
 
 export default courses;

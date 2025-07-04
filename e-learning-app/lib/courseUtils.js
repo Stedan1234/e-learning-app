@@ -6,6 +6,16 @@
 // export const getCompletedCourses = (courses) =>
 //     courses.filter(course => course.status === "completed");
 
+export const calculateCourseProgress = (course) => {
+    if (!course.lessons || course.lessons.length === 0) return 0;
+
+    const completedLessons = course.lessons.filter(
+        lesson => lesson.status === 'completed'
+    ).length;
+
+    return Math.round((completedLessons / course.lessons.length) * 100);
+  };
+
 export const getNotStartedCourses = (courses) =>
     courses.filter(course => course.status === "not-started");
 
@@ -61,18 +71,20 @@ export const markLessonComplete = (courses, courseId, lessonId) =>
                 lesson.id === lessonId ? { ...lesson, status: 'completed' } : lesson
             );
 
-            const completedLessons = updatedLessons.filter(l => l.status === 'completed').length;
-            const progressPercentage = Math.round((completedLessons / updatedLessons.length) * 100);
+            const progress = calculateCourseProgress({
+                ...course,
+                lessons: updatedLessons
+            });
 
             return {
                 ...course,
                 lessons: updatedLessons,
-                progress: progressPercentage,
-                status: progressPercentage === 100 ? 'completed' : 'in-progress'
+                progress,
+                status: progress === 100 ? 'completed' : 'in-progress'
             };
         }
         return course;
-    });
+        });
 
 
 export const getUserCourses = (courses) => {

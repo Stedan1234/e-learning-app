@@ -11,21 +11,32 @@ export default function CourseDetails({ course, onClose, onCourseUpdate }) {
   const [selectedLesson, setSelectedLesson] = useState(null);
 
   useEffect(() => {
-    // Initialize selected lesson to the first lesson
     if (currentCourse && currentCourse.lessons.length > 0) {
       setSelectedLesson(currentCourse.lessons[0]);
     }
   }, [currentCourse]);
 
   const handleLessonComplete = (lessonId) => {
+    const updatedLessons = currentCourse.lessons.map((lesson) =>
+      lesson.id === lessonId ? { ...lesson, status: 'completed' } : lesson
+    );
 
-    updateLessonStatus(course.id, lessonId, 'completed');
+    const completedCount = updatedLessons.filter(
+      (l) => l.status === 'completed'
+    ).length;
+    const progress = Math.round((completedCount / updatedLessons.length) * 100);
+    const status = progress === 100 ? 'completed' : 'in-progress';
 
-    const updatedCourse = { ...currentCourse, lessons: updatedLessons };
+    const updatedCourse = {
+      ...currentCourse,
+      lessons: updatedLessons,
+      progress,
+      status,
+    };
+
     setCurrentCourse(updatedCourse);
 
     if (onCourseUpdate) {
-      const updatedCourse = { ...course };
       onCourseUpdate(updatedCourse);
     }
   };

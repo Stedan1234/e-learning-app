@@ -15,14 +15,26 @@ const CourseInProgress = () => {
   // Initialize state from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('courses');
+    const defaultCourses = courses; // from imported coursesData
+
     if (saved) {
-      setAllCourses(JSON.parse(saved));
+      try {
+        const parsed = JSON.parse(saved);
+
+        // Merge with default courses to get new additions
+        const merged = defaultCourses.map((defaultCourse) => {
+          const savedCourse = parsed.find((c) => c.id === defaultCourse.id);
+          return savedCourse || defaultCourse;
+        });
+
+        setAllCourses(merged);
+      } catch (e) {
+        setAllCourses(defaultCourses);
+      }
     } else {
-      // Fallback to coursesData if no localStorage
-      setAllCourses(courses);
+      setAllCourses(defaultCourses);
     }
   }, []);
-
   const addCourse = (courseId) => {
     setAllCourses((prev) =>
       prev.map((c) =>

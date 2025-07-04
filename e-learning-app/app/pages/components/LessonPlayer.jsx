@@ -7,7 +7,11 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [videoProgress, setVideoProgress] = useState(0);
 
-
+  useEffect(() => {
+    if (videoProgress >= 95 && !quizCompleted) {
+      handleMarkComplete();
+    }
+  }, [videoProgress, quizCompleted]);
 
   if (!lesson) {
     return (
@@ -39,13 +43,18 @@ export default function LessonPlayer({ lesson, course, onLessonCompleted }) {
         <div className='aspect-w-16 aspect-h-9 rounded-lg overflow-hidden'>
           {lesson.videoId ? (
             <YouTube
-              key={lesson.videoId}
               videoId={lesson.videoId}
-              opts={{
-                width: '100%',
-                height: '100%',
+              opts={{ width: '100%', height: '100%' }}
+              onStateChange={(event) => {
+                if (event.data === 0) {
+                  // 0 = ended
+                  setVideoProgress(100);
+                }
               }}
-              onStateChange={onPlayerStateChange}
+              onProgress={(event) => {
+                const percent = (event.playedSeconds / event.duration) * 100;
+                setVideoProgress(percent);
+              }}
             />
           ) : (
             <div className='flex items-center justify-center h-full bg-gray-100'>

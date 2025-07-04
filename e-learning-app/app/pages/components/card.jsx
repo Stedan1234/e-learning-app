@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useState } from 'react';
+// import courses from '@/data/coursesData';
 export default function Card({
   course,
   onAdd, 
@@ -15,8 +16,6 @@ export default function Card({
   };
 
   return (
-
-    
     <div
       className='bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 cursor-pointer transition hover:shadow-md'
       onClick={() => onView(course)}
