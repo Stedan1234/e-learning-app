@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from '@vercel/analytics/next';
 import Navbar from "@/app/pages/components/navbar";
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
@@ -22,15 +23,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang='en'>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
         <ClerkProvider>
-          <Navbar/>
+          <Navbar />
           {children}
+          <Analytics />
           <Footer />
-          <ScrollToTop /> 
+          <ScrollToTop />
         </ClerkProvider>
       </body>
     </html>
-  )
+  );
 }
