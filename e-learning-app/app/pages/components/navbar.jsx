@@ -62,7 +62,9 @@ const Navbar = () => {
             </SignedIn>
             <SignedOut>
               {navLinks
-                .filter((link) => link.label === 'About' || link.label === 'Contact')
+                .filter(
+                  (link) => link.label === 'About' || link.label === 'Contact'
+                )
                 .map((link) => (
                   <Link
                     key={link.href}
@@ -120,20 +122,40 @@ const Navbar = () => {
         <div className='md:hidden mt-4 pb-4 border-t border-gray-200'>
           <div className='flex flex-col gap-4 pt-4'>
             {/* Mobile Navigation Links */}
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`text-sm font-medium px-2 py-1 rounded transition-colors ${
-                  isActive(link.href)
-                    ? 'text-[var(--color-hover)] bg-gray-50'
-                    : 'text-[var(--gray-color)]'
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
+            <SignedIn>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-sm font-medium transition-colors hover:text-[var(--color-hover)] ${
+                    isActive(link.href)
+                      ? 'text-[var(--color-hover)] border-b-2 border-[var(--color-hover)] pb-1'
+                      : 'text-[var(--gray-color)]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </SignedIn>
+            <SignedOut>
+              {navLinks
+                .filter(
+                  (link) => link.label === 'About' || link.label === 'Contact'
+                )
+                .map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`text-sm font-medium transition-colors hover:text-[var(--color-hover)] ${
+                      isActive(link.href)
+                        ? 'text-[var(--color-hover)] border-b-2 border-[var(--color-hover)] pb-1'
+                        : 'text-[var(--gray-color)]'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+            </SignedOut>
 
             {/* Mobile Auth */}
             <div className='flex flex-col gap-2 mt-4'>
