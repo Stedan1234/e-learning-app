@@ -245,7 +245,7 @@ export default function Dashboard() {
           <div className='animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 [var(--color-hover)]'></div>
         </div>
       ) : (
-        <div className='courses-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6'>
+        <div className='courses-grid grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6'>
           {filteredCourses.length > 0 ? (
             filteredCourses.map((course) => (
               <Card
