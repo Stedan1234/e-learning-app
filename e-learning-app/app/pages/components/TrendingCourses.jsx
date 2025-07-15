@@ -11,7 +11,7 @@ const TrendingCourses = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   // Define trending courses (IDs of popular courses)
-  const trendingCourseIds = [1, 3, 5, 7];
+  const trendingCourseIds = [1, 3, 4, 7];
   const trendingCourses = courses.filter((course) =>
     trendingCourseIds.includes(course.id)
   );
